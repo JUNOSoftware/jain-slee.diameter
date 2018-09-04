@@ -22,6 +22,8 @@
 
 package net.java.slee.resource.diameter.cca.events.avp;
 
+import net.java.slee.resource.diameter.base.events.avp.DiameterAvpType;
+
 /**
  * Start time:19:45:16 2008-12-08<br>
  * Project: mobicents-diameter-parent<br>
@@ -31,6 +33,7 @@ package net.java.slee.resource.diameter.cca.events.avp;
  * @author <a href="mailto:brainslog@gmail.com"> Alexandre Mendonca </a>
  */
 public final class CreditControlAVPCodes {
+  public static final long TGPP_VENDOR_ID = 10415L;
 
   private CreditControlAVPCodes() {
     // TODO Auto-generated constructor stub
@@ -1312,4 +1315,7 @@ public final class CreditControlAVPCodes {
    */
   public static final int User_Equipment_Info_Value = 460;
 
+  public static final DiameterAvpType SERVICE_ID_AVP_TYPE = DiameterAvpType.fromString("UTF8String");
+  public static final int SERVICE_INFORMATION = 873;
+  
 }

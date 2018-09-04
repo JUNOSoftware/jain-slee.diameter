@@ -33,6 +33,7 @@ import net.java.slee.resource.diameter.cca.events.avp.ServiceParameterInfoAvp;
 import net.java.slee.resource.diameter.cca.events.avp.SubscriptionIdAvp;
 import net.java.slee.resource.diameter.cca.events.avp.UsedServiceUnitAvp;
 import net.java.slee.resource.diameter.cca.events.avp.UserEquipmentInfoAvp;
+import net.java.slee.resource.diameter.ro.events.avp.ServiceInformation;
 
 import org.jdiameter.api.Message;
 import org.mobicents.slee.resource.diameter.cca.events.avp.RequestedServiceUnitAvpImpl;
@@ -40,6 +41,7 @@ import org.mobicents.slee.resource.diameter.cca.events.avp.ServiceParameterInfoA
 import org.mobicents.slee.resource.diameter.cca.events.avp.SubscriptionIdAvpImpl;
 import org.mobicents.slee.resource.diameter.cca.events.avp.UsedServiceUnitAvpImpl;
 import org.mobicents.slee.resource.diameter.cca.events.avp.UserEquipmentInfoAvpImpl;
+import org.mobicents.slee.resource.diameter.ro.events.avp.ServiceInformationImpl;
 
 /**
  * CCA Credit-Control-Request message implementation.<br>
@@ -88,6 +90,8 @@ public class CreditControlRequestImpl extends CreditControlMessageImpl implement
   {
     return (MultipleServicesIndicatorType) getAvpAsEnumerated(CreditControlAVPCodes.Multiple_Services_Indicator, MultipleServicesIndicatorType.class);
   }
+  
+
 
   /*
    * (non-Javadoc)
@@ -374,4 +378,27 @@ public class CreditControlRequestImpl extends CreditControlMessageImpl implement
     addAvp(CreditControlAVPCodes.User_Equipment_Info, userEquipmentInfo.byteArrayValue());
   }
 
+/*
+   * (non-Javadoc)
+   * @see net.java.slee.resource.diameter.ro.events.RoCreditControlMessage#getServiceInformation()
+   */
+  public ServiceInformation getServiceInformation() {
+    return (ServiceInformation) super.getAvpAsCustom(CreditControlAVPCodes.SERVICE_INFORMATION, CreditControlAVPCodes.TGPP_VENDOR_ID, ServiceInformationImpl.class);
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see net.java.slee.resource.diameter.ro.events.RoCreditControlMessage#setServiceInformation(net.java.slee.resource.diameter.ro.events.avp.ServiceInformation)
+   */
+  public void setServiceInformation(ServiceInformation si) throws IllegalStateException {
+    super.addAvp(CreditControlAVPCodes.SERVICE_INFORMATION, CreditControlAVPCodes.TGPP_VENDOR_ID, si.byteArrayValue());
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see net.java.slee.resource.diameter.ro.events.RoCreditControlMessage#hasServiceInformation()
+   */
+  public boolean hasServiceInformation() {
+    return super.hasAvp(CreditControlAVPCodes.SERVICE_INFORMATION, CreditControlAVPCodes.TGPP_VENDOR_ID);
+  }
 }
